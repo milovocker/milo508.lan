@@ -1,19 +1,21 @@
 <?php
 
-    $errores = "";
+    $error_nombre = "";
+    $error_edad = "";
+    $error_correo = "";
     $saludo = "";
 
     if (!empty($_POST['paso'])){
         // Comprobar datos
         // nombre vacio?
         if (empty($_POST['nombre'])){
-            $errores = "<span class=\"errornuevo\">¡ERROR! No se ha enviado ningún nombre.<br /></span>";
+            $error_nombre = "<span class=\"errornuevo\">¡ERROR! No se ha enviado ningún nombre.<br/></span>";
         // edad vacía?
         } elseif (empty($_POST['edad'])) {
-            $errores = "<span class=\"errornuevo\">¡ERROR! No se ha enviado ninguna edad.<br /></span>";
+            $error_edad = "<span class=\"errornuevo\">¡ERROR! No se ha enviado ninguna edad.<br/></span>";
         // mail vacio?
         }elseif (empty($_POST['correo'])) {
-            $errores = "<span class=\"errornuevo\">¡ERROR! No se ha enviado ningún correo.<br /></span>";
+            $error_correo = "<span class=\"errornuevo\">¡ERROR! No se ha enviado ningún correo.<br/></span>";
         }else{
             $saludo = "<span class=\"mensaje\">¡Hola, {$_POST['nombre']}! Tienes {$_POST['edad']} años y tu correo electrónico es {$_POST['correo']}<br/></span>";
         }
@@ -53,9 +55,9 @@
 </head>
 <body>
     <form action="formulario2.php" method="post">
-        Nombre: <input type="text" name="nombre" value="<?php echo $nombre; ?>" <?php echo $errores; ?>>
-        Edad: <input type="number" name="edad" value="<?php echo $edad; ?>" <?php echo $errores; ?>>
-        Correo Electrónico <input type="email" name="correo" value="<?php echo $correo; ?>" <?php echo $errores; ?>>
+        Nombre: <input type="text" name="nombre" value="<?php echo $nombre; ?>" <?php echo $error_nombre; ?>><br>
+        Edad: <input type="number" name="edad" value="<?php echo $edad; ?>" <?php echo $error_edad; ?>><br>
+        Correo Electrónico <input type="email" name="correo" value="<?php echo $correo; ?>" <?php echo $error_correo; ?>><br>
 
 
         <input type="hidden" name="paso" value="1" />
