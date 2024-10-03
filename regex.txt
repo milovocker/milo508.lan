@@ -1,0 +1,7 @@
+Siempre entre comillas y barras: "/expresion.../"
+
+preg_match: recibe 2 parametros: la expresion regular y la variable
+$email = rwrwr@gege.es;
+if (preg_match("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9]/")){
+    echo "Email valido";
+}

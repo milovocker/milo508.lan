@@ -1,0 +1,13 @@
+Desarrolla un script en PHP que valide y procese la entrada del usuario utilizando expresiones regulares. Debes realizar las siguientes tareas:
+
+Solicita al usuario que introduzca una dirección de correo electrónico, un número de teléfono y un nombre de usuario.
+Utiliza expresiones regulares para validar:
+El correo electrónico: Debe tener un formato válido (por ejemplo, nombre@dominio.com).
+El número de teléfono: Debe estar compuesto únicamente por dígitos y tener una longitud de 9 a 15 caracteres.
+El nombre de usuario: Debe comenzar con una letra y puede contener letras, números y guiones bajos, con una longitud mínima de 5 y máxima de 20 caracteres.
+Si alguno de los datos no es válido, muestra un mensaje de error específico para cada campo.
+Si todos los datos son válidos, muestra un mensaje de confirmación y reemplaza cualquier letra minúscula en el nombre de usuario por su correspondiente mayúscula utilizando preg_replace.
+Puntos extra:
+
+Añade la opción de validar una URL y asegúrate de que comience con "http://" o "https://".
+Este ejercicio ayudará a los estudiantes a comprender la sintaxis de las expresiones regulares y cómo aplicarlas en la validación de datos en PHP.

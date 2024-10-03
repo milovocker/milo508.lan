@@ -1,21 +1,30 @@
 <?php
 
-    $error_nombre = "";
-    $error_edad = "";
-    $error_correo = "";
-    $saludo = "";
+    $error_nombre = False;
+    $error_edad = False;
+    $error_correo = False;
+    $saludo = $errores = "";
 
     if (!empty($_POST['paso'])){
         // Comprobar datos
         // nombre vacio?
         if (empty($_POST['nombre'])){
-            $error_nombre = "<span class=\"errornuevo\">¡ERROR! No se ha enviado ningún nombre.<br/></span>";
+
+            $errores = "<span class=\"errornuevo\">¡ERROR! No se ha enviado ningún nombre.<br></span>";
+            $error_nombre = True;
+
         // edad vacía?
-        } elseif (empty($_POST['edad'])) {
-            $error_edad = "<span class=\"errornuevo\">¡ERROR! No se ha enviado ninguna edad.<br/></span>";
+        }if (empty($_POST['edad'])) {
+
+            $errores .= "<span class=\"errornuevo\">¡ERROR! No se ha enviado ninguna edad.<br></span>";
+            $error_edad = True;
+
         // mail vacio?
-        }elseif (empty($_POST['correo'])) {
-            $error_correo = "<span class=\"errornuevo\">¡ERROR! No se ha enviado ningún correo.<br/></span>";
+        }if (empty($_POST['correo'])) {
+
+            $errores .= "<span class=\"errornuevo\">¡ERROR! No se ha enviado ningún correo.<br></span>";
+            $error_correo = True;
+
         }else{
             $saludo = "<span class=\"mensaje\">¡Hola, {$_POST['nombre']}! Tienes {$_POST['edad']} años y tu correo electrónico es {$_POST['correo']}<br/></span>";
         }
@@ -55,12 +64,15 @@
 </head>
 <body>
     <form action="formulario2.php" method="post">
-        Nombre: <input type="text" name="nombre" value="<?php echo $nombre; ?>" <?php echo $error_nombre; ?>><br>
-        Edad: <input type="number" name="edad" value="<?php echo $edad; ?>" <?php echo $error_edad; ?>><br>
-        Correo Electrónico <input type="email" name="correo" value="<?php echo $correo; ?>" <?php echo $error_correo; ?>><br>
+        <label for="nombre">Nombre: </label>
+        <input type="text" name="nombre" value="<?php echo $nombre; ?>" <?php echo $error_nombre; ?>><br/>
+        <label for="edad">Edad: </label>
+        <input type="number" name="edad" value="<?php echo $edad; ?>" <?php echo $error_edad; ?>><br/>
+        <label for="correo">Correo Electrónico </label>
+        <input type="email" name="correo" value="<?php echo $correo; ?>" <?php echo $error_correo; ?>><br/>
 
 
-        <input type="hidden" name="paso" value="1" />
+        <input type="hidden" name="paso" value="1" >
         <input type="submit">
     </form>
     <?php echo $saludo; ?>
