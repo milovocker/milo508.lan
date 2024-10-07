@@ -1,7 +1,7 @@
 <?php
     $nombre_usuario = $correo = $telefono = '';
 
-    // errores
+    // errores cambioooooo
     $error_nombre = $error_correo = $error_telefono = False;
 
     // inicializar mensaje de error y mensaje de confirmación
