@@ -1,7 +1,7 @@
 <?php
     $nombre_usuario = $correo = $telefono = '';
 
-    // errores cambioooooo
+    // errores 
     $error_nombre = $error_correo = $error_telefono = False;
 
     // inicializar mensaje de error y mensaje de confirmación
@@ -16,6 +16,7 @@
         }
         else
         {
+            $error_correo = True;
             $errores .= "<h4>Correo electrónico no válido</h4><br/>";
         }
 
@@ -26,6 +27,7 @@
         }
         else
         {
+            $error_telefono = True;
             $errores .= "<h4>Teléfono no válido</h4><br/>";
         }
 
@@ -33,12 +35,11 @@
         // validar nombre:
         if (preg_match("/[a-zA-Z0-9_]{5-20}/", $_POST['nombre_usuario']))
         {
-            //seguir nombre
             $nombre_usuario = $_POST['nombre_usuario'];
         }
         else
         {
-
+            $error_nombre = True;
             $errores .= "<h4>Nombre de usuario no válido</h4> <br/>";
 
         }
@@ -49,12 +50,12 @@
             $confirmacion = "<h2>Hola $nombre! Correo: $correo</h2>";
         }
 
-
+        $nombre_usuario = $_POST['nombre_usuario'];
+        $correo = $_POST['correo'];
+        $telefono =  $_POST['telefono'];
     }
     
-    $nombre_usuario = $_POST['nombre_usuario'];
-    $correo = $_POST['correo'];
-    $telefono =  $_POST['telefono'];
+   
 
 ?>
 
