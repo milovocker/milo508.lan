@@ -1,0 +1,21 @@
+*{
+    font-family: sans-serif;
+}
+
+p{
+    background-color: #042940;
+    color: #DBF227;
+    font-weight: bold;
+    width: max-content;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+h3, .genero_elegido{
+    background-color: #005C53;
+    color: #DBF227;
+    font-weight: bold;
+    width: max-content;
+    padding: 20px;
+    border-radius: 10px;
+}
