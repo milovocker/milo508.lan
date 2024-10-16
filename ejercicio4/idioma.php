@@ -21,7 +21,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Idioma</title>
 </head>
 <body>
     <form action="idioma.php" method="post">
@@ -35,5 +35,10 @@
         </select>
         <input type="submit">
     </form>
+
+    
+    <br>
+    <a href="login.php">Login</a>
+
 </body>
 </html>
