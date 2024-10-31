@@ -1,12 +1,14 @@
 <?php
 
+
     require_once "general.php";
 
     ob_start();
 
+
     $form = Form::getInstance();
 
-    echo Plantilla::header("Milo 35508");
+    echo Plantilla::header("CIFP Zonzamas");
 
     define('EDITORIALES', ['AY' => 'Anaya', 'ST' => 'Santillana']);
 
@@ -23,16 +25,26 @@
     {
         case 'create':
 
+
             inicializar();
 
             if (!empty($form->val['paso']))
             {
                 $errores = $form->validar();
 
+
+
                 if(!$form->cantidad_errores)
                 {
-                    insertar();
-                    $form->activeDisable();
+                    if(!existeLibro())
+                    {
+                        insertar();
+                        $form->activeDisable();
+                    }
+                    else
+                    {
+                        $form->duplicado = True;
+                    }
 
                 }
             }
@@ -57,9 +69,17 @@
 
                 if(!$form->cantidad_errores)
                 {
-                    actualizar();
-                    $form->activeDisable();
+                    if (!existeLibro($form->val['id']))
+                    {
+                        actualizar();
+                        $form->activeDisable();
+                    }
+                    else
+                    {
+                        $form->duplicado = True;
+                    }
                 }
+
             }
 
             $html_salida .= cabecera('actualizar');
@@ -67,11 +87,12 @@
 
         break;
         case 'delete':
+
             eliminar();
 
             ob_clean();
 
-            header("location: /biblioteca.php");
+            header("location: /biblioteca/");
             exit(0);
 
         break;
@@ -89,7 +110,7 @@
     {
         $form = Form::getInstance();
 
-        $form->accion('biblioteca.php');
+        $form->accion('/biblioteca/');
 
         $paso        = new Hidden('paso'); 
         $paso->value = 1;
@@ -113,29 +134,6 @@
     }
 
 
-    function validar_campos()
-    {
-        $errores = [];
-
-        $campos = ['nombre', 'descripcion', 'autor', 'editorial'];
-
-
-        foreach($campos as $campo)
-        {
-            if(empty($_POST[$campo]))
-            {
-                $errores[$campo]['error']       = True;
-                $errores[$campo]['desc_error']  = TEXTO_ERROR;
-                $errores[$campo]['class_error'] = 'error_campo_texto';
-            }
-        }
-
-
-
-        return $errores;
-
-    }
-
 
     function cabecera($titulo_seccion='')
     {
@@ -146,13 +144,14 @@
         else
         {
             $breadcrumb = "
-                <li class=\"breadcrumb-item\"><a href=\"/ejercicico_plantilla/biblioteca.php\">biblioteca</a></li>
+                <li class=\"breadcrumb-item\"><a href=\"/biblioteca/\">biblioteca</a></li>
                 <li class=\"breadcrumb-item active\" aria-current=\"page\">{$titulo_seccion}</li>
             ";
         }
 
 
         return "
+              <br><br><br><br>
             <nav aria-label=\"breadcrumb\">
                 <ol class=\"breadcrumb\">
                     <li class=\"breadcrumb-item\"><a href=\"/\">Zonzamas</a></li>
@@ -165,31 +164,29 @@
 
     function formulario($oper,$errores = [])
     {
+        $form = Form::getInstance();
 
+        $id = $form->val['id'];
 
-        $id = $_REQUEST['id'];
-
-        $mensaje_exito = $botones_extra = $disabled = '';
-        if($_POST['paso'] && count($errores) == 0)
+        $botones_extra = '';
+        $mensaje_exito = False;
+        if($form->val['paso'] && $form->cantidad_errores == 0)
         {
-            $mensaje_exito = '<div class="exito">Operación realizada con éxito</div>';
-            $disabled = 'disabled';
-            $botones_extra = '<a href="/ejercicico_plantilla/biblioteca.php?oper=create" class="btn btn-primary">Nuevo libro</a>';
+            $mensaje_exito = True;
+            $botones_extra = '<a href="/biblioteca/alta/" class="btn btn-primary">Nuevo libro</a>';
 
             if($oper == 'update')
-                $botones_extra .= ' <a href="/ejercicico_plantilla/biblioteca.php?oper=update&id='. $id .'" class="btn btn-primary">Editar</a>';
+                $botones_extra .= ' <a href="/biblioteca/actualizar/'. $id .'" class="btn btn-primary">Editar</a>';
         
         }
 
-        $value_editoriales = '';
-        foreach(EDITORIALES as $cod_editorial => $texto_editorial)
-        {
-            $value_editoriales .= "<option value=\"{$cod_editorial}\">{$texto_editorial}</option>";
-        }
+        $html_formulario = $form->pintar(['botones_extra' => $botones_extra,'exito' =>  $mensaje_exito]);
 
+
+        /*
         $html_formulario = "
 
-            <form method=\"POST\" action=\"/ejercicico_plantilla/biblioteca.php\">
+            <form method=\"POST\" action=\"biblioteca.php\">
                 <input type=\"hidden\" name=\"paso\" value=\"1\" />
                 <input type=\"hidden\" name=\"oper\" value=\"{$oper}\" />
                 <input type=\"hidden\" name=\"id\" value=\"{$id}\" />
@@ -227,6 +224,7 @@
             </form>
         
         ";
+        */
 
         return $html_formulario;
 
@@ -235,14 +233,49 @@
 
     }
 
+    function existeLibro($id='')
+    {
+        $form = Form::getInstance();
+
+
+        if (   !empty($form->val['name']) 
+            && !empty($form->val['description'])
+            && !empty($form->val['autor'])
+            && !empty($form->val['editorial'])
+        )
+        {
+            $andid = '';
+            if (!empty($id))
+                $andid = "AND id <> '{$id}' ";
+
+
+            $sql = "
+                SELECT nombre
+                FROM   libros
+                WHERE  nombre      = '{$form->val['name']}'
+                AND    descripcion = '{$form->val['description']}'
+                AND    autor       = '{$form->val['autor']}'
+                AND    editorial   = '{$form->val['editorial']}'
+                {$andid}
+            ";
+
+            $resultado = BBDD::query($sql);
+        }
+
+        return $resultado->num_rows;
+    }
+
+
     function eliminar()
     {
 
-        if (!empty($_GET['id']))
+        $id = Form::getInstance()->val['id'];
+
+        if (!empty($id))
         {
             $sql = "
                 DELETE FROM libros
-                WHERE id = '{$_GET['id']}'
+                WHERE id = '{$id}'
             ";
             $resultado = BBDD::query($sql);
         }
@@ -250,7 +283,9 @@
 
     function recuperar()
     {
-        $id =  $_REQUEST['id'];
+        $form = Form::getInstance();
+
+        $id =  $form->val['id'];
 
         $sql = "
             SELECT * 
@@ -264,28 +299,31 @@
         $fila = $resultado->fetch_assoc();
 
 
-        $_POST['nombre']      = $fila['nombre'];
-        $_POST['descripcion'] = $fila['descripcion'];
-        $_POST['autor']       = $fila['autor'];
-        $_POST['editorial']   = $fila['editorial'];
-
+        $form->elementos['name']->value        = $fila['nombre'];
+        $form->elementos['description']->value = $fila['descripcion'];
+        $form->elementos['autor']->value       = $fila['autor'];
+        $form->elementos['editorial']->value   = $fila['editorial'];
     }
 
     function actualizar()
     {
-        if (!empty($_POST['id']))
+
+        $form = Form::getInstance();
+
+        if (!empty($form->val['id']))
         {
             $sql = "
                 UPDATE libros
 
-                SET    nombre      = '{$_POST['nombre']}'
-                    ,descripcion = '{$_POST['descripcion']}'
-                    ,autor       = '{$_POST['autor']}'
-                    ,editorial   = '{$_POST['editorial']}'
+                SET  nombre      = '{$form->val['name']}'
+                    ,descripcion = '{$form->val['description']}'
+                    ,autor       = '{$form->val['autor']}'
+                    ,editorial   = '{$form->val['editorial']}'
 
                     ,ip_ult_mod   = '{$_SERVER['REMOTE_ADDR']}'
+                    ,fecha_ult_mod = CURRENT_TIMESTAMP
 
-                WHERE id = '{$_POST['id']}'
+                WHERE id = '{$form->val['id']}'
 
             ";
             $resultado = BBDD::query($sql);
@@ -295,6 +333,8 @@
 
     function insertar()
     {
+        $form = Form::getInstance();
+
         $sql = "
             INSERT INTO libros
             (
@@ -306,10 +346,10 @@
             )
             VALUES
             (   
-                 '". $_POST['nombre'] ."'
-                ,'". $_POST['descripcion'] ."'
-                ,'". $_POST['autor'] ."'
-                ,'". $_POST['editorial'] ."'
+                 '". $form->val['name'] ."'
+                ,'". $form->val['description'] ."'
+                ,'". $form->val['autor'] ."'
+                ,'". $form->val['editorial'] ."'
 
                 ,'". $_SERVER['REMOTE_ADDR'] ."'
             );
@@ -322,7 +362,10 @@
 
     function resultados_busqueda()
     {
+        $form = Form::getInstance();
+
         $listado_libros = '
+              <br><br>
         <table class="table">
             <thead>
                 <tr>
@@ -339,11 +382,11 @@
 
         $limite = LIMITE_SCROLL;
 
-        $pagina = $_GET['pagina'];
+        $pagina = $form->val['pagina'];
 
         $offset = $pagina * $limite;
 
-        $sql = "SELECT * FROM libros LIMIT {$limite} OFFSET {$offset}";
+        $sql = "SELECT * FROM libros ORDER BY fecha_ult_mod DESC LIMIT {$limite} OFFSET {$offset} ";
 
         $resultado = BBDD::query($sql);
 
@@ -355,8 +398,8 @@
                 $listado_libros .= "
                     <tr>
                         <th scope=\"row\">
-                            <a href=\"/ejercicico_plantilla/biblioteca.php?oper=update&id={$fila['id']}\" class=\"btn btn-primary\">Actualizar</a>
-                            <a onclick=\"if(confirm('Cuidado, estás tratando de eliminar el libro: {$fila['nombre']}')) location.href = '/ejercicico_plantilla/biblioteca.php?oper=delete&id={$fila['id']}';\" class=\"btn btn-danger\">Eliminar</a>
+                            <a href=\"/biblioteca/actualizar/{$fila['id']}\" class=\"btn btn-primary\">Actualizar</a>
+                            <a onclick=\"if(confirm('Cuidado, estás tratando de eliminar el libro: {$fila['nombre']}')) location.href = '/biblioteca/eliminar/{$fila['id']}';\" class=\"btn btn-danger\">Eliminar</a>
                         </th>
                         <td>{$fila['nombre']}</td>
                         <td>{$fila['descripcion']}</td>
@@ -372,7 +415,7 @@
         }
 
         if($pagina)
-            $pagina_anterior = '<li class="page-item"><a class="page-link" href="/ejercicico_plantilla/biblioteca.php?pagina='. ($pagina - 1) .'"">Anterior</a></li>';
+            $pagina_anterior = '<li class="page-item"><a class="page-link" href="/biblioteca/pag/'. ($pagina - 1) .'"">Anterior</a></li>';
 
         $listado_libros .= '
                 </tbody>
@@ -380,13 +423,13 @@
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     '. $pagina_anterior .'
-                    <li class="page-item"><a class="page-link" href="/ejercicico_plantilla/biblioteca.php?pagina='. ($pagina + 1) .'">Siguiente</a></li>
+                    <li class="page-item"><a class="page-link" href="/biblioteca/pag/'. ($pagina + 1) .'">Siguiente</a></li>
                 </ul>
             </nav>
 
 
             <div class="alta">
-                <a href="/ejercicico_plantilla/biblioteca.php?oper=create" class="btn btn-success">Alta de libro</a>
+                <a href="/biblioteca/alta/" class="btn btn-success">Alta de libro</a>
             </div>
         ';
 
@@ -405,7 +448,7 @@
 
     
     <div class="container">
-    <br><br><br><br><br><br><br><br>
+
     <?php echo $html_salida; ?>
 
     </div>
@@ -415,5 +458,3 @@
     echo Plantilla::footer();
 
 ?>
-
-
