@@ -1,3 +1,4 @@
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
     #RewriteRule ^producto/([0-9]+)$             /producto.php?id=$1 [L]
