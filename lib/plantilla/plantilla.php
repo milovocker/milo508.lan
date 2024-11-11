@@ -61,7 +61,7 @@
         static function menu()
         {
             return "
-                      <header id=\"header\" class=\"header d-flex align-items-center fixed-top\">
+                      <header id=\"header\" class=\"header d-flex align-items-center\">
                         <div class=\"container-fluid container-xl position-relative d-flex align-items-center\">
 
                         <a href=\"/index.php\" class=\"logo d-flex align-items-center me-auto\">
@@ -71,9 +71,9 @@
 
                         <nav id=\"navmenu\" class=\"navmenu\">
                             <ul>
-                            <li><a href=\"index.php\" class=\"active\">Home</a></li>
-                            <li><a href=\"biblioteca.php\">Biblioteca</a></li>
-                            <li><a href=\"usuarios.php\">Usuarios</a></li>
+                            <li><a href=\"/index.php\" class=\"active\">Home</a></li>
+                            <li><a href=\"/var/www/html/milo508.lan/proc/biblioteca_crud/biblioteca_crud.php\">Biblioteca</a></li>
+                            <li><a href=\"/usuarios.php\">Usuarios</a></li>
 
                             <li><a href=\"#\">Contacto</a></li>
                             </ul>
@@ -83,6 +83,7 @@
                         <a class=\"btn-getstarted\" href=\"index.php\">Comencemos</a>
 
                         </div>
+                        <br><br><br>
                     </header>
             " ;
         }
@@ -92,7 +93,7 @@
             return "
             <footer id=\"footer\" class=\"footer position-relative light-background\">
 
-                <img src=\"/assets/img/logo.png\" alt=\"\">
+                <img src=\"/assets/img/logo.png\" alt=\"\" style=\"width: 300px; margin-left: 15%; margin-top: 2%\">
 
                 <div class=\"container footer-top\">
                 <div class=\"row gy-4\">
@@ -144,4 +145,48 @@
             </footer>
             ";
         }
+
+        static function cargarSeccion($seccion)
+        {
+            $titulo = 'Milo 508';
+            if (!empty($seccion))
+                $titulo .= ' - '.ucfirst($seccion);
+        
+            $salida = Plantilla::header($titulo);
+
+            switch($seccion)
+            {
+                case 'biblioteca':
+
+                    $biblioteca = new BibliotecaCRUD();
+
+                    $salida .= $biblioteca->main();
+
+                break;
+
+                default:
+                    
+                    $salida .= '
+                          <section class="pt-6 bg-600" id="home">
+                            <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-md-5 col-lg-6 order-0 order-md-1 text-end"><img class="pt-7 pt-md-0 w-100" src="assets/img/gallery/hero-header.png" width="470" alt="hero-header" /></div>
+                                <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
+                                <h4 class="fw-bold font-sans-serif">Become Master</h4>
+                                <h2 class="fs-6 fs-xl-7 mb-5">Learn New Skills Online Find Best Courses</h2><a class="btn btn-primary me-2" href="#!" role="button">Get A Quote</a><a class="btn btn-outline-secondary" href="#!" role="button">Read more</a>
+                                </div>
+                            </div>
+                            </div>
+                        </section>
+                    
+                    ';
+                    
+                break;
+            }
+
+            $salida .= Plantilla::footer();
+
+            return $salida;
+        }
+
     }

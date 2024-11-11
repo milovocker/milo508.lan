@@ -10,7 +10,6 @@
     if(!empty($_POST['paso']))
     {
 
-
         if (empty($_POST['nombre']))
         {
             $errores = "<span class=\"error\">¡ERROR! No se ha enviado ningún nombre.<br /></span>";
