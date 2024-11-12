@@ -72,7 +72,7 @@
                         <nav id=\"navmenu\" class=\"navmenu\">
                             <ul>
                             <li><a href=\"/index.php\" class=\"active\">Home</a></li>
-                            <li><a href=\"/var/www/html/milo508.lan/proc/biblioteca_crud/biblioteca_crud.php\">Biblioteca</a></li>
+                            <li><a href=\"/biblioteca/\">Biblioteca</a></li>
                             <li><a href=\"/usuarios.php\">Usuarios</a></li>
 
                             <li><a href=\"#\">Contacto</a></li>
@@ -158,32 +158,19 @@
             {
                 case 'biblioteca':
 
-                    $biblioteca = new BibliotecaCRUD();
-
-                    $salida .= $biblioteca->main();
+                    $objeto_crud = new BibliotecaCRUD();
 
                 break;
 
                 default:
-                    
-                    $salida .= '
-                          <section class="pt-6 bg-600" id="home">
-                            <div class="container">
-                            <div class="row align-items-center">
-                                <div class="col-md-5 col-lg-6 order-0 order-md-1 text-end"></div>
-                                <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
-                                <h4 class="fw-bold font-sans-serif">Become Master</h4>
-                                <h2 class="fs-6 fs-xl-7 mb-5">Learn New Skills Online Find Best Courses</h2><a class="btn btn-primary me-2" href="#!" role="button">Get A Quote</a><a class="btn btn-outline-secondary" href="#!" role="button">Read more</a>
-                                </div>
-                            </div>
-                            </div>
-                        </section>
-                    
-                    ';
-                    
+
+                    $objeto_crud = new IndexCRUD();
                 break;
             }
 
+            $salida .= $objeto_crud->main();
+
+                    
             $salida .= Plantilla::footer();
 
             return $salida;
