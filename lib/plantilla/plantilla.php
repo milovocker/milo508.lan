@@ -73,7 +73,8 @@
                             <ul>
                             <li><a href=\"/index.php\" class=\"active\">Home</a></li>
                             <li><a href=\"/biblioteca/\">Biblioteca</a></li>
-                            <li><a href=\"/usuarios.php\">Usuarios</a></li>
+                            <li><a href=\"/usuarios/\">Usuarios</a></li>
+                            <li><a href=\"/horario/\">Horario</a></li>
 
                             <li><a href=\"#\">Contacto</a></li>
                             </ul>

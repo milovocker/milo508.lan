@@ -9,6 +9,14 @@
     RewriteRule ^biblioteca/eliminar/([0-9]+)$   /index.php?seccion=biblioteca&oper=delete&id=$1 [L]
     RewriteRule ^biblioteca/alta\/               /index.php?seccion=biblioteca&oper=create [L]
 
+    # usuarios
+    RewriteRule ^usuarios\/$                   /index.php?seccion=usuarios [L]
+    RewriteRule ^usuarios/pag/([0-9]+)$        /index.php?seccion=usuarios&pagina=$1 [L]
+
+    RewriteRule ^usuarios/actualizar/([0-9]+)$ /index.php?seccion=usuarios&oper=update&id=$1 [L]
+    RewriteRule ^usuarios/eliminar/([0-9]+)$   /index.php?seccion=usuarios&oper=delete&id=$1 [L]
+    RewriteRule ^usuarios/alta\/               /index.php?seccion=usuarios&oper=create [L]
+
 
     # Redirigir la URL de tipo /datos/otros/numero a /index.php?seccion=datos&oper=otros&id=numero
     #RewriteRule ^seccion/([^/]+)/([^/]+)/([^/]+)$ /index.php?seccion=$1&oper=$2&id=$3 [L,QSA]
