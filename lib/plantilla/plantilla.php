@@ -73,7 +73,7 @@
                             <ul>
                             <li><a href=\"/index.php\" class=\"active\">Home</a></li>
                             <li><a href=\"/biblioteca/\">Biblioteca</a></li>
-                            <li><a href=\"/usuarios/\">Usuarios</a></li>
+                            <li><a href=\"/personas/\">Personas</a></li>
                             <li><a href=\"/horario/\">Horario</a></li>
 
                             <li><a href=\"#\">Contacto</a></li>
@@ -163,8 +163,11 @@
 
                 break;
 
-                default:
+                case 'personas':
 
+                    $objeto_crud = new UsuariosCRUD();
+
+                default:
                     $objeto_crud = new IndexCRUD();
                 break;
             }

@@ -1,7 +1,3 @@
-
-
---/home/juanra/Escritorio/libros.sql
-
 DROP TABLE libros;
 CREATE TABLE libros(
 

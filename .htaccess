@@ -10,12 +10,12 @@
     RewriteRule ^biblioteca/alta\/               /index.php?seccion=biblioteca&oper=create [L]
 
     # usuarios
-    RewriteRule ^usuarios\/$                   /index.php?seccion=usuarios [L]
-    RewriteRule ^usuarios/pag/([0-9]+)$        /index.php?seccion=usuarios&pagina=$1 [L]
+    RewriteRule ^personas\/$                   /index.php?seccion=personas [L]
+    RewriteRule ^personas/pag/([0-9]+)$        /index.php?seccion=personas&pagina=$1 [L]
 
-    RewriteRule ^usuarios/actualizar/([0-9]+)$ /index.php?seccion=usuarios&oper=update&id=$1 [L]
-    RewriteRule ^usuarios/eliminar/([0-9]+)$   /index.php?seccion=usuarios&oper=delete&id=$1 [L]
-    RewriteRule ^usuarios/alta\/               /index.php?seccion=usuarios&oper=create [L]
+    RewriteRule ^personas/actualizar/([0-9]+)$ /index.php?seccion=personas&oper=update&id=$1 [L]
+    RewriteRule ^personas/eliminar/([0-9]+)$   /index.php?seccion=personas&oper=delete&id=$1 [L]
+    RewriteRule ^personas/alta\/               /index.php?seccion=personas&oper=create [L]
 
 
     # Redirigir la URL de tipo /datos/otros/numero a /index.php?seccion=datos&oper=otros&id=numero

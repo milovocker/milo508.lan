@@ -2,9 +2,12 @@
 
 
 
-    class Usuario extends Tabla
+    class Persona extends Tabla
     {
-        const TABLA = 'usuarios';
+        const TABLA = 'personas';
+
+        const GENEROS = ['H' => 'Hombre', 'M' => 'Mujer'];
+        const OCUPACIONES = ['A' => 'Alumno', 'P' => 'Profesor'];
 
         function __construct()
         {
@@ -14,14 +17,17 @@
 
 
 
-        function existeUsuario($nombre,$email,$edad,$id='')
+        function existePersona($nombre,$email,$edad,$genero,$ocupacion,$id='')
         {
             $opt = [];
             
             $opt['select']['nombre'] = '';
+            $opt['where']['nombre']  = $dni;
             $opt['where']['nombre']  = $nombre;
             $opt['where']['email']   = $email;
             $opt['where']['edad']    = $edad;
+            $opt['where']['edad']    = $genero;
+            $opt['where']['edad']    = $ocupacion;
 
             if(!empty($id))
                 $opt['notwhere']['id'] = $id;

@@ -117,9 +117,6 @@
                 while ($fila = $resultado->fetch_assoc()) 
                 {
 
-                    
-                    
-
                     $listado_libros .= "
                         <tr>
                             <th scope=\"row\">

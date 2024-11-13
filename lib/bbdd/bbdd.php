@@ -7,9 +7,9 @@
 
         //Datos de conexión
         private const SERVIDOR = 'localhost';
-        private const USUARIO  = 'milosql';
+        private const USUARIO  = 'milo';
         private const PASSWORD = 'Admin.1234';
-        private const BBDD     = 'biblioteca';
+        private const BBDD     = 'milolan';
 
 
         private function __construct()
