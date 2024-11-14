@@ -17,7 +17,7 @@
 
 
 
-        function existePersona($nombre,$email,$edad,$genero,$ocupacion,$id='')
+        function existePersona($dni,$nombre,$email,$edad,$genero,$ocupacion,$id='')
         {
             $opt = [];
             

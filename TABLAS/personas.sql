@@ -1,7 +1,7 @@
 DROP TABLE personas;
 CREATE TABLE personas(
-
-    DNI VARCHAR(11) PRIMARY KEY
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+    ,dni VARCHAR(11) 
     ,nombre VARCHAR(50) NOT NULL
     ,email VARCHAR(100) NOT NULL UNIQUE
     ,edad INT(3) NOT NULL
@@ -10,7 +10,7 @@ CREATE TABLE personas(
 
 );
 
-INSERT INTO personas (DNI, nombre, email, edad, genero, ocupacion) VALUES
+INSERT INTO personas(dni, nombre, email, edad, genero, ocupacion) VALUES
 ('00000001B', 'Luna', 'luna.sol@gmail.com', 22, 'M', 'A'),
 ('00000002C', 'Alex', 'alex.river@gmail.com', 30, 'H', 'P'),
 ('00000003D', 'Camila', 'camila.estrella@gmail.com', 27, 'M', 'P'),

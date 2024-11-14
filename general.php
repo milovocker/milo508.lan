@@ -2,7 +2,6 @@
 
 
 
-
 define('EREG_TEXTO_100_OBLIGATORIO','/^.{1,100}$/');
 define('EREG_TEXTO_150_OBLIGATORIO','/^.{1,150}$/');
 

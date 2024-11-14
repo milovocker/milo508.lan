@@ -165,8 +165,9 @@
 
                 case 'personas':
 
-                    $objeto_crud = new UsuariosCRUD();
-
+                    $objeto_crud = new PersonasCRUD();
+                break;
+                
                 default:
                     $objeto_crud = new IndexCRUD();
                 break;

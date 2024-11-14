@@ -1,7 +1,7 @@
 <?php
 
 
-    class PersonaCRUD extends ProgramaBase
+    class PersonasCRUD extends ProgramaBase
     {
         const LIMITE_SCROLL = 5;
 
@@ -27,7 +27,7 @@
 
             $dni         = new Input ('dni', ['placeholder' => 'DNI del usuario'     , 'validar' => True, 'ereg' => EREG_TEXTO_100_OBLIGATORIO  ]);
             $nombre      = new Input   ('nombre'       ,['placeholder' => 'Nombre del usuario'     , 'validar' => True, 'ereg' => EREG_TEXTO_100_OBLIGATORIO  ]);
-            $email       = new Textarea('email'  ,['placeholder' => 'Email usuario...', 'validar' => True ]);
+            $email       = new Input('email'  ,['placeholder' => 'Email usuario...', 'validar' => True ]);
             $edad        = new Input   ('edad'        ,['placeholder' => 'Autor del libro...'      , 'validar' => True, 'ereg' => EREG_TEXTO_150_OBLIGATORIO  ]);
             $genero      = new Select  ('genero'    ,Persona::GENEROS,['validar' => True]);
             $ocupacion   = new Select   ('ocupacion'        ,Persona::OCUPACIONES,['validar' => True]);
@@ -48,9 +48,8 @@
         {
 
             $cantidad = 0;
-            if (   !empty($this->form->val['nombre']) 
-                && !empty($this->form->val['dni'])
-                && !empty($this->form->val['descripcion'])
+            if (   !empty($this->form->val['dni']) 
+                && !empty($this->form->val['nombre'])
                 && !empty($this->form->val['email'])
                 && !empty($this->form->val['edad'])
                 && !empty($this->form->val['genero'])
@@ -59,9 +58,8 @@
             {   
 
                 $cantidad = $this->persona->existePersona(
-                    $this->form->val['nombre']
-                ,$this->form->val['dni']
-                ,$this->form->val['descripcion']
+                    $this->form->val['dni']
+                ,$this->form->val['nombre']
                 ,$this->form->val['email']
                 ,$this->form->val['edad']
                 ,$this->form->val['genero']
@@ -81,12 +79,12 @@
 
 
 
-            $this->form->elementos['dni']->value  = $this->persona->dni;
-            $this->form->elementos['nombre']->value  = $this->persona->nombre;
-            $this->form->elementos['email']->value   = $this->persona->email;
-            $this->form->elementos['edad']->value    = $this->persona->edad;
-            $this->form->elementos['genero']->value    = $this->persona->genero;
-            $this->form->elementos['ocupacion']->value    = $this->persona->ocupacion;
+            $this->form->elementos['dni']->value        = $this->persona->dni;
+            $this->form->elementos['nombre']->value     = $this->persona->nombre;
+            $this->form->elementos['email']->value      = $this->persona->email;
+            $this->form->elementos['edad']->value       = $this->persona->edad;
+            $this->form->elementos['genero']->value     = $this->persona->genero;
+            $this->form->elementos['ocupacion']->value  = $this->persona->ocupacion;
         }
 
 
