@@ -53,19 +53,6 @@ horario
     fecha_ult_mod   
 
 
---opcional, pero no para crear el horario sino para saber qué modulos tiene cada alumno. 
-modulos_alumnos
-    id PK
-    id_modulo
-    id_alumno
-
-    --datos auditoría
-    ip_alta         
-    fecha_alta      
-    ip_ult_mod      
-    fecha_ult_mod   
-
-
 ciclos
     id PK
     nombre --nombre del ciclo

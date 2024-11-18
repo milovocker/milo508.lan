@@ -1,11 +1,9 @@
 DROP TABLE profesores;
 CREATE TABLE profesores(
 
-    dni VARCHAR(11) NOT NULL
-    ,ciclo_impartido VARCHAR(100) NOT NULL
-    ,mod_impartido
+    id_profesor INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+    ,id_persona INT NOT NULL
+    ,id_ciclo_tutor VARCHAR(100) NOT NULL
 
-    FOREIGN KEY (dni) REFERENCES personas(dni)
+    ,FOREIGN KEY (id_persona) REFERENCES personas(id_persona)
 );
-
-INSERT INTO alumnos(dni, ciclo_cursando)VALUES('00000000A','Desarrollo de aplicaciones web');

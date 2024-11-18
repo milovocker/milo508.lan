@@ -90,3 +90,5 @@ INSERT INTO libros(nombre, descripcion, editorial, autor , ip_alta) VALUES('La v
 INSERT INTO libros(nombre, descripcion, editorial, autor , ip_alta) VALUES('Amigos para siempre','Historia de una enemistad','AY','Robert C. Martin','127.0.0.1');
 INSERT INTO libros(nombre, descripcion, editorial, autor , ip_alta) VALUES('Harry el porreta','Bichos raros que hacen cosas raras','ST','Tolkien','127.0.0.1');
 
+
+

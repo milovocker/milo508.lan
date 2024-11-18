@@ -1,10 +1,12 @@
 DROP TABLE ciclos;
 CREATE TABLE ciclos(
+    id_ciclo INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+    ,nombre VARCHAR(50) NOT NULL
+    ,siglas VARCHAR(3) NOT NULL
 
-    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY
-    ,nombre_ciclo VARCHAR(100) NOT NULL
-    ,siglas_ciclo VARCHAR(100) NOT NULL
-    ,curso INT(1) NOT NULL 
+    ,ip_alta            VARCHAR(15)
+    ,fecha_alta         TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+    ,ip_ult_mod         VARCHAR(15)
+    ,fecha_ult_mod      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-INSERT INTO ciclos(nombre_ciclo, siglas_ciclo)VALUES('Desarrollo de aplicaciones web','DAW', 1);
