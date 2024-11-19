@@ -1,4 +1,6 @@
 
+JOIN DE PERSONAS Y ALIUMNOS
+select * from personas where id_persona in (select id_persona from alumnos);
 
 
 
