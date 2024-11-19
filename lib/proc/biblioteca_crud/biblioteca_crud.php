@@ -1,6 +1,5 @@
 <?php
 
-
     class BibliotecaCRUD extends ProgramaBase
     {
         const LIMITE_SCROLL = 5;

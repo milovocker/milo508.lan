@@ -13,3 +13,5 @@ CREATE TABLE ciclos_modulos(
     ,FOREIGN KEY (id_ciclo) REFERENCES ciclos(id_ciclo)
     ,FOREIGN KEY (id_modulo) REFERENCES modulos(id_modulo)
 );
+
+INSERT into ciclos_modulos(id_ciclo, id_modulo)VALUES(1, 1);

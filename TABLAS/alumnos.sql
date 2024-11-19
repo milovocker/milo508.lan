@@ -7,3 +7,4 @@ CREATE TABLE alumnos(
     ,FOREIGN KEY (id_persona) REFERENCES personas(id_persona)
 );
 
+insert into alumnos(id_persona)VALUES(1);

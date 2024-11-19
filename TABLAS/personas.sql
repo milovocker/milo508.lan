@@ -15,3 +15,5 @@ CREATE TABLE personas(
 
 );
 
+insert into personas(dni, nombre, apellido1, email)VALUES('00003442A', 'Raquel', 'Barrios', 'raquelbarrios@gmail.com');
+

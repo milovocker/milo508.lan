@@ -1,7 +1,6 @@
 <?php
 
 
-
 define('EREG_TEXTO_100_OBLIGATORIO','/^.{1,100}$/');
 define('EREG_TEXTO_150_OBLIGATORIO','/^.{1,150}$/');
 
@@ -31,14 +30,15 @@ spl_autoload_register(function ($nombre) {
             require_once "lib/form/{$nombre}.php";
         break;
         case 'libro':     
-        case 'tabla':          
+        case 'tabla':   
+        case 'persona':       
             require_once "lib/tablas/{$nombre}.php";
         break;
         case 'programabase':
             require_once "lib/proc/programa_base.php";
         break;
         case 'crud':
-            require_once "lib/proc/{$nombre_backup}_crud/{$nombre_backup}_crud.php";
+            require "lib/proc/{$nombre_backup}_crud/{$nombre_backup}_crud.php";
         break;
         default:
             require_once "lib/{$nombre}/{$nombre}.php";

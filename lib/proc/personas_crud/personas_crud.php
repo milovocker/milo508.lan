@@ -1,6 +1,5 @@
 <?php
 
-
     class PersonasCRUD extends ProgramaBase
     {
         const LIMITE_SCROLL = 5;
@@ -22,15 +21,14 @@
             $paso        = new Hidden('paso'); 
             $paso->value = 1;
 
-            $oper        = new Hidden('oper');
-            $id          = new Hidden('id');      
+            $oper        = new Hidden('oper'); 
+            $id          = new Hidden('id');        
 
-            $dni         = new Input ('dni', ['placeholder' => 'DNI del usuario'     , 'validar' => True, 'ereg' => EREG_TEXTO_100_OBLIGATORIO  ]);
-            $nombre      = new Input   ('nombre'       ,['placeholder' => 'Nombre del usuario'     , 'validar' => True, 'ereg' => EREG_TEXTO_100_OBLIGATORIO  ]);
-            $email       = new Input('email'  ,['placeholder' => 'Email usuario...', 'validar' => True ]);
-            $edad        = new Input   ('edad'        ,['placeholder' => 'Autor del libro...'      , 'validar' => True, 'ereg' => EREG_TEXTO_150_OBLIGATORIO  ]);
-            $genero      = new Select  ('genero'    ,Persona::GENEROS,['validar' => True]);
-            $ocupacion   = new Select   ('ocupacion'        ,Persona::OCUPACIONES,['validar' => True]);
+            $dni         = new Input   ('dni'          ,['placeholder' => 'DNI'     , 'validar' => True, 'ereg' => EREG_TEXTO_100_OBLIGATORIO  ]);
+            $nombre      = new Input   ('nombre'       ,['placeholder' => 'Nombre', 'validar' => True ]);
+            $email       = new Input   ('email'        ,['placeholder' => 'Email'      , 'validar' => True, 'ereg' => EREG_TEXTO_150_OBLIGATORIO  ]);
+            $apellido1   = new Input   ('apellido1'        ,['placeholder' => 'Primer Apellido'      , 'validar' => True, 'ereg' => EREG_TEXTO_150_OBLIGATORIO  ]);
+            $apellido2   = new Input   ('apellido2'        ,['placeholder' => 'Segundo Apellido'      , 'validar' => True, 'ereg' => EREG_TEXTO_150_OBLIGATORIO  ]);
 
             $this->form->cargar($paso);
             $this->form->cargar($oper);
@@ -38,11 +36,9 @@
             $this->form->cargar($dni);
             $this->form->cargar($nombre);
             $this->form->cargar($email);
-            $this->form->cargar($edad);
-            $this->form->cargar($genero);
-            $this->form->cargar($ocupacion);
+            $this->form->cargar($apellido1);
+            $this->form->cargar($apellido2);
         }
-
 
         function existe($id='')
         {
@@ -51,9 +47,8 @@
             if (   !empty($this->form->val['dni']) 
                 && !empty($this->form->val['nombre'])
                 && !empty($this->form->val['email'])
-                && !empty($this->form->val['edad'])
-                && !empty($this->form->val['genero'])
-                && !empty($this->form->val['ocupacion'])
+                && !empty($this->form->val['apellido1'])
+                && !empty($this->form->val['apellido2'])
             )
             {   
 
@@ -61,9 +56,8 @@
                     $this->form->val['dni']
                 ,$this->form->val['nombre']
                 ,$this->form->val['email']
-                ,$this->form->val['edad']
-                ,$this->form->val['genero']
-                ,$this->form->val['ocupacion']
+                ,$this->form->val['apellido1']
+                ,$this->form->val['apellido2']
                 ,$this->form->val['id']
                 );
             }
@@ -71,8 +65,7 @@
             return $cantidad;
         }
 
-
-        function recuperar()
+       function recuperar()
         {
 
             $this->persona->recuperar($this->form->val['id']);
@@ -82,11 +75,9 @@
             $this->form->elementos['dni']->value        = $this->persona->dni;
             $this->form->elementos['nombre']->value     = $this->persona->nombre;
             $this->form->elementos['email']->value      = $this->persona->email;
-            $this->form->elementos['edad']->value       = $this->persona->edad;
-            $this->form->elementos['genero']->value     = $this->persona->genero;
-            $this->form->elementos['ocupacion']->value  = $this->persona->ocupacion;
-        }
-
+            $this->form->elementos['apellido1']->value  = $this->persona->apellido1;
+            $this->form->elementos['apellido2']->value  = $this->persona->apellido2;
+        } 
 
         function resultados_busqueda()
         {
@@ -98,9 +89,8 @@
                         <th scope="col">DNI</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Edad</th>
-                        <th scope="col">Género</th>
-                        <th scope="col">Ocupación</th>
+                        <th scope="col">Primer apellido</th>
+                        <th scope="col">Segundo apellido</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -132,15 +122,14 @@
                     $listado_personas .= "
                         <tr>
                             <th scope=\"row\">
-                                ". enlace("/{$this->seccion}/actualizar/{$fila['dni']}",'Actualizar',['class' => 'btn btn-primary']) ."
-                                ". enlace("#",'Eliminar',['class' => 'btn btn-danger','onclick' => "if(confirm('Cuidado, estás tratando de eliminar a: {$fila['nombre']}')) location.href = '/personas/eliminar/{$fila['dni']}';"]) ."
+                                ". enlace("/{$this->seccion}/actualizar/{$fila['id']}",'Actualizar',['class' => 'btn btn-primary']) ."
+                                ". enlace("#",'Eliminar',['class' => 'btn btn-danger','onclick' => "if(confirm('Cuidado, estás tratando de eliminar a: {$fila['nombre']}')) location.href = '/personas/eliminar/{$fila['id']}';"]) ."
                             </th>
                             <td>{$fila['dni']}</td>
                             <td>{$fila['nombre']}</td>
                             <td>{$fila['email']}</td>
-                            <td>{$fila['edad']}</td>
-                            <td>". Persona::GENEROS[$fila['genero']] ."</td>
-                            <td>". Persona::OCUPACIONES[$fila['ocupacion']] ."</td>
+                            <td>{$fila['apellido1']}</td>
+                            <td>{$fila['apellido2']}</td>
                         </tr>
                     ";
                 }
@@ -176,9 +165,7 @@
 
 
         }
+
+
+
     }
-
-
-
-
-

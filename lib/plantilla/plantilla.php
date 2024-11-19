@@ -164,7 +164,6 @@
                 break;
 
                 case 'personas':
-
                     $objeto_crud = new PersonasCRUD();
                 break;
                 

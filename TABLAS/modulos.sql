@@ -15,4 +15,4 @@ CREATE TABLE modulos(
     ,FOREIGN KEY (id_profesor) REFERENCES profesores(id_profesor)
 );
 
-INSERT INTO modulos(nombre, id_profesor, color, siglas) VALUES ('Desarrollo de Aplicaciones Web', '')
+INSERT INTO modulos(nombre, id_profesor, color, siglas) VALUES ('Diseño de interfaces', '1', '#415fcc', 'DOR');
