@@ -166,7 +166,10 @@
                 case 'personas':
                     $objeto_crud = new PersonasCRUD();
                 break;
-                
+
+                case 'horario':
+                    $objeto_crud = new HorarioCRUD;
+                break;
                 default:
                     $objeto_crud = new IndexCRUD();
                 break;
@@ -174,7 +177,7 @@
 
             $salida .= $objeto_crud->main();
 
-                    
+            
             $salida .= Plantilla::footer();
 
             return $salida;
