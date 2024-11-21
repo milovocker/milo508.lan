@@ -31,7 +31,9 @@ class HorarioCRUD extends ProgramaBase
         </section>
   ';
     }
-
+    function inicializar(){
+        $ciclos   = new Select  ('ciclos'    ,Ciclo::CICLOS,['validar' => False]);
+    }
     function elegirCiclo(){
         $this->form->accion('/'. $this->seccion .'/');
 
@@ -40,9 +42,17 @@ class HorarioCRUD extends ProgramaBase
 
         $oper        = new Hidden('oper'); 
 
-        $coches   = new Select  ('coches'    ,Ciclo::CICLOS,['validar' => True]);
+        $this->form->cargar($ciclos);
+    }
 
-        $this->form->cargar($coches);
+    function mostrarCiclos(){
+        $salida = '<form>
+                <select>
+        ';
+        
+        $salida = '</select>
+                </form>
+        ';
     }
 
 }
