@@ -36,78 +36,27 @@
 
         function mostrarCiclo()
         {
-
             $ciclos = [];
-            
-            $sql = 'SELECT siglas ,nombre FROM ciclos';
 
+            $sql = 'SELECT siglas, nombre, curso FROM ciclos';
+
+            // Ejecutamos la consulta
             $resultado = BBDD::query($sql);
 
-            return $resultado;
-
-            /*$_select = 'nombre';
-            if (!empty($opt['select']))
-            {
-                $_select = '';
-                foreach($opt['select'] as $atributo => $valor)
-                {
-                    $_select .= ",{$atributo}";
-
-                }
-
-                $_select = substr($_select,1);
+            // Recorremos el resultado de la consulta
+            foreach($resultado as $fila) {
+                $ciclo_unitario = [
+                    'siglas' => $fila['siglas'],  // Guardamos las siglas
+                    'nombre' => $fila['nombre'],  // Guardamos el nombre
+                    'curso' => $fila['curso']   // Guardamos el nombre
+                ];
+                
+                // Añadimos el ciclo unitario al array de ciclos
+                array_push($ciclos, $ciclo_unitario);
             }
 
-
-            $sql = "
-                SELECT {$_select}
-                FROM {$this->tabla}
-            ";
-            $resultado = BBDD::query($sql);
-
-            return $resultado;*/
-
+            // Retornamos el array con todos los ciclos
+            return $ciclos;
         }
-
 
     }
-
-    /*<?php
-
-
-
-    class Libro extends Tabla
-    {
-        const TABLA = 'libros';
-
-        const EDITORIALES = ['AY' => 'Anaya', 'ST' => 'Santillana'];
-
-        function __construct()
-        {
-            parent::__construct(self::TABLA);
-
-        }
-
-
-
-        function existeLibro($nombre,$descripcion,$autor,$editorial,$id='')
-        {
-            $opt = [];
-            
-            $opt['select']['nombre']     = '';
-            $opt['where']['nombre']      = $nombre;
-            $opt['where']['descripcion'] = $descripcion;
-            $opt['where']['autor']       = $autor;
-            $opt['where']['editorial']   = $editorial;
-
-            if(!empty($id))
-                $opt['notwhere']['id'] = $id;
-      
-        
-        
-            $resultado = $this->seleccionar($opt);
-
-            return $resultado->num_rows;
-            
-        }
-    } */

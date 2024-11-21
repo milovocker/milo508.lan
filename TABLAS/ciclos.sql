@@ -1,16 +1,24 @@
-DROP TABLE ciclos;
-CREATE TABLE ciclos(
-    id_ciclo INT NOT NULL AUTO_INCREMENT PRIMARY KEY
-    ,nombre VARCHAR(50) NOT NULL
-    ,siglas VARCHAR(3) NOT NULL
-    ,curso INT(1) NOT NULL
-    ,letra VARCHAR(1)
 
+CREATE TABLE ciclos
+(
+
+     id                 INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+    ,nombre             VARCHAR(100) NOT NULL
+    ,siglas             CHAR(4) NOT NULL
+    ,curso              INT NOT NULL
+    ,letra              CHAR(0)
+
+    
+    
     ,ip_alta            VARCHAR(15)
     ,fecha_alta         TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-
     ,ip_ult_mod         VARCHAR(15)
     ,fecha_ult_mod      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
 
-insert into ciclos(nombre, siglas, curso) VALUES ('Desarrollo de aplicaciones web', 'DAW', 2);
+);
+    
+
+INSERT INTO ciclos(nombre,siglas,curso) VALUES('Desarrollo de Aplicaciones Web','DAW',1);
+INSERT INTO ciclos(nombre,siglas,curso) VALUES('Desarrollo de Aplicaciones Web','DAW',2);
+INSERT INTO ciclos(nombre,siglas,curso) VALUES('Administración de Sistemas Informáticos en Red','ASIR',1);
+INSERT INTO ciclos(nombre,siglas,curso) VALUES('Administración de Sistemas Informáticos en Red','ASIR',2);

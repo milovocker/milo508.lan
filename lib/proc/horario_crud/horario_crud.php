@@ -2,6 +2,16 @@
 
 class HorarioCRUD extends ProgramaBase
 {
+    const LIMITE_SCROLL = 5;
+
+    function __construct()
+                {
+        $this->horario = new Horario();
+                
+        parent::__construct($this->horario);
+            
+    
+    }
 
     function main()
     {
@@ -31,28 +41,14 @@ class HorarioCRUD extends ProgramaBase
         </section>
   ';
     }
-    function inicializar(){
-        $ciclos   = new Select  ('ciclos'    ,Ciclo::CICLOS,['validar' => False]);
-    }
-    function elegirCiclo(){
-        $this->form->accion('/'. $this->seccion .'/');
 
-        $paso        = new Hidden('paso'); 
-        $paso->value = 1;
-
-        $oper        = new Hidden('oper'); 
-
-        $this->form->cargar($ciclos);
-    }
-
-    function mostrarCiclos(){
-        $salida = '<form>
-                <select>
-        ';
-        
-        $salida = '</select>
-                </form>
+    function elegirCiclo()
+    {
+        echo("CURSOS");
+        return '
+            Cursos:
         ';
     }
+
 
 }

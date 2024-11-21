@@ -156,9 +156,7 @@
                 <div class="alta">'. enlace("/{$this->seccion}/alta/", 'Alta de libro',['class' => 'btn btn-success']) .'</div>
             ';
             
-
             return $listado_libros;
-
 
         }
     }

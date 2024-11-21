@@ -3,75 +3,9 @@ JOIN DE PERSONAS Y ALIUMNOS
 select * from personas where id_persona in (select id_persona from alumnos);
 
 
+SELECT ciclos.nombre as 'Nombre Ciclo', modulos.nombre as 'Nombre Módulo'
+FROM ciclos, modulos, ciclos_modulos 
+WHERE ciclos.id_ciclo = ciclos_modulos.id_ciclo AND modulos.id_modulo 
+= ciclos_modulos.id_modulo;
 
-personas
-    id PK
-    nombre
-    apellido_1
-    apellido_2
-    nif
-    email
-    --datos auditoría
-    ip_alta         
-    fecha_alta      
-    ip_ult_mod      
-    fecha_ult_mod   
-
-
-alumnos
-    id PK
-    id_persona FK
-
-
-profesores
-    id PK
-    id_persona FK
-    id_ciclo_tutor
-
-
-modulos
-    id PK
-    nombre
-    id_profesor FK
-    color --#FF
-    siglas --CHAR(3)
-    --datos auditoría
-    ip_alta         
-    fecha_alta      
-    ip_ult_mod      
-    fecha_ult_mod   
-
-horario
-    id PK
-    id_modulo FK
-    dia -- L,M,X,J,V,S,D
-    hora_desde
-    hora_hasta
-
-    --datos auditoría
-    ip_alta         
-    fecha_alta      
-    ip_ult_mod      
-    fecha_ult_mod   
-
-
-ciclos
-    id PK
-    nombre --nombre del ciclo
-    siglas 
-
-    --datos auditoría
-    ip_alta         
-    fecha_alta      
-    ip_ult_mod      
-    fecha_ult_mod   
-
-ciclos_modulos
-    id PK
-    id_ciclo
-    id_modulo 
-    --datos auditoría
-    ip_alta         
-    fecha_alta      
-    ip_ult_mod      
-    fecha_ult_mod   
+//Cambiar la estructura de esta función para aprovechar el framework

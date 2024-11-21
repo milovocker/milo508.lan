@@ -184,6 +184,7 @@ abstract class Tabla
     function seleccionar($opt = [])
     {
         $_select = '*';
+        // $opt['select'] = 'nombreciclo...'
         if (!empty($opt['select']))
         {
             $_select = '';

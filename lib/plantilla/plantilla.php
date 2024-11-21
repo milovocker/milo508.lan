@@ -74,7 +74,7 @@
                             <li><a href=\"/index.php\" class=\"active\">Home</a></li>
                             <li><a href=\"/biblioteca/\">Biblioteca</a></li>
                             <li><a href=\"/personas/\">Personas</a></li>
-                            <li><a href=\"/horario/\">Horario</a></li>
+                            <li><a href=\"/ciclo/\">Horario</a></li>
 
                             <li><a href=\"#\">Contacto</a></li>
                             </ul>
@@ -167,8 +167,8 @@
                     $objeto_crud = new PersonasCRUD();
                 break;
 
-                case 'horario':
-                    $objeto_crud = new HorarioCRUD;
+                case 'ciclo':
+                    $objeto_crud = new CiclosCRUD;
                 break;
                 default:
                     $objeto_crud = new IndexCRUD();
