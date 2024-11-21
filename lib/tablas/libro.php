@@ -29,8 +29,6 @@
             if(!empty($id))
                 $opt['notwhere']['id'] = $id;
       
-        
-        
             $resultado = $this->seleccionar($opt);
 
             return $resultado->num_rows;

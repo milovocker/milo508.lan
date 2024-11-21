@@ -24,40 +24,36 @@
             $oper        = new Hidden('oper'); 
             $id          = new Hidden('id');        
 
-            $dni         = new Input   ('dni'          ,['placeholder' => 'DNI'     , 'validar' => True, 'ereg' => EREG_TEXTO_100_OBLIGATORIO  ]);
+            $nif         = new Input   ('nif'          ,['placeholder' => 'nif'     , 'validar' => True, 'ereg' => EREG_TEXTO_100_OBLIGATORIO  ]);
             $nombre      = new Input   ('nombre'       ,['placeholder' => 'Nombre', 'validar' => True ]);
-            $email       = new Input   ('email'        ,['placeholder' => 'Email'      , 'validar' => True, 'ereg' => EREG_TEXTO_150_OBLIGATORIO  ]);
-            $apellido1   = new Input   ('apellido1'        ,['placeholder' => 'Primer Apellido'      , 'validar' => True, 'ereg' => EREG_TEXTO_150_OBLIGATORIO  ]);
-            $apellido2   = new Input   ('apellido2'        ,['placeholder' => 'Segundo Apellido'      , 'validar' => True, 'ereg' => EREG_TEXTO_150_OBLIGATORIO  ]);
+            $apellido_1   = new Input   ('apellido_1'        ,['placeholder' => 'Primer Apellido'      , 'validar' => True, 'ereg' => EREG_TEXTO_150_OBLIGATORIO  ]);
+            $apellido_2   = new Input   ('apellido_2'        ,['placeholder' => 'Segundo Apellido'      , 'validar' => False]);
 
             $this->form->cargar($paso);
             $this->form->cargar($oper);
             $this->form->cargar($id);
-            $this->form->cargar($dni);
+            $this->form->cargar($nif);
             $this->form->cargar($nombre);
-            $this->form->cargar($email);
-            $this->form->cargar($apellido1);
-            $this->form->cargar($apellido2);
+            $this->form->cargar($apellido_1);
+            $this->form->cargar($apellido_2);
         }
 
         function existe($id='')
         {
 
             $cantidad = 0;
-            if (   !empty($this->form->val['dni']) 
+            if (   !empty($this->form->val['nif']) 
                 && !empty($this->form->val['nombre'])
-                && !empty($this->form->val['email'])
-                && !empty($this->form->val['apellido1'])
-                && !empty($this->form->val['apellido2'])
+                && !empty($this->form->val['apellido_1'])
+                && !empty($this->form->val['apellido_2'])
             )
             {   
 
                 $cantidad = $this->persona->existePersona(
-                    $this->form->val['dni']
+                    $this->form->val['nif']
                 ,$this->form->val['nombre']
-                ,$this->form->val['email']
-                ,$this->form->val['apellido1']
-                ,$this->form->val['apellido2']
+                ,$this->form->val['apellido_1']
+                ,$this->form->val['apellido_2']
                 ,$this->form->val['id']
                 );
             }
@@ -72,11 +68,10 @@
 
 
 
-            $this->form->elementos['dni']->value        = $this->persona->dni;
+            $this->form->elementos['nif']->value        = $this->persona->nif;
             $this->form->elementos['nombre']->value     = $this->persona->nombre;
-            $this->form->elementos['email']->value      = $this->persona->email;
-            $this->form->elementos['apellido1']->value  = $this->persona->apellido1;
-            $this->form->elementos['apellido2']->value  = $this->persona->apellido2;
+            $this->form->elementos['apellido_1']->value  = $this->persona->apellido_1;
+            $this->form->elementos['apellido_2']->value  = $this->persona->apellido_2;
         } 
 
         function resultados_busqueda()
@@ -86,9 +81,8 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">DNI</th>
+                        <th scope="col">NIF</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Email</th>
                         <th scope="col">Primer apellido</th>
                         <th scope="col">Segundo apellido</th>
                     </tr>
@@ -125,11 +119,10 @@
                                 ". enlace("/{$this->seccion}/actualizar/{$fila['id']}",'Actualizar',['class' => 'btn btn-primary']) ."
                                 ". enlace("#",'Eliminar',['class' => 'btn btn-danger','onclick' => "if(confirm('Cuidado, estás tratando de eliminar a: {$fila['nombre']}')) location.href = '/personas/eliminar/{$fila['id']}';"]) ."
                             </th>
-                            <td>{$fila['dni']}</td>
+                            <td>{$fila['nif']}</td>
                             <td>{$fila['nombre']}</td>
-                            <td>{$fila['email']}</td>
-                            <td>{$fila['apellido1']}</td>
-                            <td>{$fila['apellido2']}</td>
+                            <td>{$fila['apellido_1']}</td>
+                            <td>{$fila['apellido_2']}</td>
                         </tr>
                     ";
                 }

@@ -20,7 +20,9 @@
                        ,'enviar'      => 'Enviar'
                        ,'error_gen'   => 'El campo es inválido'
                        ,'nuevo'       => 'Nuevo'
-                       ,'editar'      => 'Editar'
+                       ,'nif'      => 'NIF'
+                       ,'apellido_1'      => 'Primer apellido'
+                       ,'apellido_2'      => 'Segundo apellido'
  
                     ];
 

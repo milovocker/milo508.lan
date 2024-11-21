@@ -15,7 +15,7 @@
 
 
         //Crear todos los métodos igual que en libro
-        function existeHorario($id_modulo,$dia,$hora_desde,$hora_hasta,$id_horario='')
+        function existeHorario($id_modulo,$dia,$hora_desde,$hora_hasta,$id='')
         {
             $opt = [];
             
@@ -28,8 +28,6 @@
             if(!empty($id))
                 $opt['notwhere']['id'] = $id;
       
-        
-        
             $resultado = $this->seleccionar($opt);
 
             return $resultado->num_rows;

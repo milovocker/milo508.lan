@@ -64,7 +64,7 @@
             ';
             
             $prueba .= '
-                <form action="/horario_crud/horario_crud.php">
+                <form action="/index.php">
                     <select id="ciclos" class="form-control form-select" name="ciclos">
             ';
 
@@ -77,7 +77,7 @@
             $prueba .= '
                     </select>
                     <br>
-                    <button class="btn btn-primary">Ver Horario</button>
+                    <div class="horario">'. enlace("/horario/{$opcion_ciclo['siglas']}/", 'Ver horario',['class' => 'btn btn-success']) .'</div>
                 </form>';
 
             return $prueba;

@@ -11,16 +11,15 @@
             parent::__construct(self::TABLA);
         }
 
-        function existePersona($dni,$nombre,$email,$apellido1,$apellido2,$id='')
+        function existePersona($nif,$nombre,$email,$apellido_1,$apellido_2,$id='')
         {
             $opt = [];
             
             $opt['select']['nombre']   = '';
-            $opt['where']['dni']       = $dni;
+            $opt['where']['nif']       = $nif;
             $opt['where']['nombre']    = $nombre;
-            $opt['where']['email']     = $email;
-            $opt['where']['apellido1'] = $apellido1;
-            $opt['where']['apellido2'] = $apellido2;
+            $opt['where']['apellido1'] = $apellido_1;
+            $opt['where']['apellido2'] = $apellido_2;
 
             if(!empty($id))
                 $opt['notwhere']['id'] = $id;
